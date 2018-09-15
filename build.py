@@ -48,7 +48,7 @@ def get_node_dockerfiles():
 import itertools
 
 if __name__ == '__main__':
-    #fetch_all_repos()
+    fetch_all_repos()
     print(get_python_dockerfiles())
     print(get_node_dockerfiles())
     for dockerfileTuple in itertools.product(get_python_dockerfiles(), get_node_dockerfiles()):
@@ -71,5 +71,6 @@ if __name__ == '__main__':
                 include_dockerfile(df, template)
             with open(dockerfileTuple[1], 'r') as df:
                 include_dockerfile(df, template)
+            template.write("CMD ['python3']\n")
 
 
