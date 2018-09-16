@@ -1,2 +1,4 @@
 dockerfile-compose
+pyyaml
 requests
+packaging
