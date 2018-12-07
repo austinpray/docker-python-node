@@ -4,13 +4,14 @@ FROM buildpack-deps:stretch
 ENV PATH /usr/local/bin:$PATH
 
 ENV LANG C.UTF-8
+ENV PYTHONIOENCODING UTF-8
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
 		tk-dev \
 	&& rm -rf /var/lib/apt/lists/*
 
-ENV GPG_KEY 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
-ENV PYTHON_VERSION 3.6.7
+ENV GPG_KEY C01E1CAD5EA2C4F0B8E3571504C367C218ADD4FF
+ENV PYTHON_VERSION 2.7.15
 
 RUN set -ex \
 	\
@@ -29,11 +30,8 @@ RUN set -ex \
 	&& gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" \
 	&& ./configure \
 		--build="$gnuArch" \
-		--enable-loadable-sqlite-extensions \
 		--enable-shared \
-		--with-system-expat \
-		--with-system-ffi \
-		--without-ensurepip \
+		--enable-unicode=ucs4 \
 	&& make -j "$(nproc)" \
 	&& make install \
 	&& ldconfig \
@@ -46,13 +44,7 @@ RUN set -ex \
 		\) -exec rm -rf '{}' + \
 	&& rm -rf /usr/src/python \
 	\
-	&& python3 --version
-
-RUN cd /usr/local/bin \
-	&& ln -s idle3 idle \
-	&& ln -s pydoc3 pydoc \
-	&& ln -s python3 python \
-	&& ln -s python3-config python-config
+	&& python2 --version
 
 ENV PYTHON_PIP_VERSION 18.1
 
@@ -75,10 +67,12 @@ RUN set -ex; \
 		\) -exec rm -rf '{}' +; \
 	rm -f get-pip.py
 
+RUN pip install --no-cache-dir virtualenv
+
 RUN groupadd --gid 1000 node \
   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
 
-ENV NODE_VERSION 8.14.0
+ENV NODE_VERSION 11.3.0
 
 RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && case "${dpkgArch##*-}" in \

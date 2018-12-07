@@ -2,346 +2,460 @@
 jobs:
   include:
   - if: type NOT IN (cron)
-    name: 3-10, 3-10.10, 3-10.10.0, 3.7-10, 3.7-10.10, 3.7-10.10.0, 3.7.0-10, 3.7.0-10.10,
-      3.7.0-10.10.0
+    name: 3-11, 3-11.3, 3-11.3.0, 3.7-11, 3.7-11.3, 3.7-11.3.0, 3.7.1-11, 3.7.1-11.3,
+      3.7.1-11.3.0
+    script:
+    - set -e
+    - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+    - '# run tests'
+    - travis_retry docker build -t austinpray/python-node dockerfiles/3.7-11
+    - docker tag austinpray/python-node austinpray/python-node:3-11
+    - docker tag austinpray/python-node austinpray/python-node:3-11.3
+    - docker tag austinpray/python-node austinpray/python-node:3-11.3.0
+    - docker tag austinpray/python-node austinpray/python-node:3.7-11
+    - docker tag austinpray/python-node austinpray/python-node:3.7-11.3
+    - docker tag austinpray/python-node austinpray/python-node:3.7-11.3.0
+    - docker tag austinpray/python-node austinpray/python-node:3.7.1-11
+    - docker tag austinpray/python-node austinpray/python-node:3.7.1-11.3
+    - docker tag austinpray/python-node austinpray/python-node:3.7.1-11.3.0
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3-11'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3-11.3'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3-11.3.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7-11'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7-11.3'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7-11.3.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.1-11'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.1-11.3'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.1-11.3.0'
+    stage: Image Builds
+  - if: type NOT IN (cron)
+    name: 3-10, 3-10.14, 3-10.14.1, 3.7-10, 3.7-10.14, 3.7-10.14.1, 3.7.1-10, 3.7.1-10.14,
+      3.7.1-10.14.1
     script:
     - set -e
     - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
     - '# run tests'
     - travis_retry docker build -t austinpray/python-node dockerfiles/3.7-10
     - docker tag austinpray/python-node austinpray/python-node:3-10
-    - docker tag austinpray/python-node austinpray/python-node:3-10.10
-    - docker tag austinpray/python-node austinpray/python-node:3-10.10.0
+    - docker tag austinpray/python-node austinpray/python-node:3-10.14
+    - docker tag austinpray/python-node austinpray/python-node:3-10.14.1
     - docker tag austinpray/python-node austinpray/python-node:3.7-10
-    - docker tag austinpray/python-node austinpray/python-node:3.7-10.10
-    - docker tag austinpray/python-node austinpray/python-node:3.7-10.10.0
-    - docker tag austinpray/python-node austinpray/python-node:3.7.0-10
-    - docker tag austinpray/python-node austinpray/python-node:3.7.0-10.10
-    - docker tag austinpray/python-node austinpray/python-node:3.7.0-10.10.0
+    - docker tag austinpray/python-node austinpray/python-node:3.7-10.14
+    - docker tag austinpray/python-node austinpray/python-node:3.7-10.14.1
+    - docker tag austinpray/python-node austinpray/python-node:3.7.1-10
+    - docker tag austinpray/python-node austinpray/python-node:3.7.1-10.14
+    - docker tag austinpray/python-node austinpray/python-node:3.7.1-10.14.1
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3-10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3-10.10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3-10.10.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3-10.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3-10.14.1'
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7-10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7-10.10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7-10.10.0'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.0-10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.0-10.10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.0-10.10.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7-10.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7-10.14.1'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.1-10'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.1-10.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.1-10.14.1'
     stage: Image Builds
   - if: type NOT IN (cron)
-    name: 3-8, 3-8.12, 3-8.12.0, 3.7-8, 3.7-8.12, 3.7-8.12.0, 3.7.0-8, 3.7.0-8.12,
-      3.7.0-8.12.0
+    name: 3-8, 3-8.14, 3-8.14.0, 3.7-8, 3.7-8.14, 3.7-8.14.0, 3.7.1-8, 3.7.1-8.14,
+      3.7.1-8.14.0
     script:
     - set -e
     - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
     - '# run tests'
     - travis_retry docker build -t austinpray/python-node dockerfiles/3.7-8
     - docker tag austinpray/python-node austinpray/python-node:3-8
-    - docker tag austinpray/python-node austinpray/python-node:3-8.12
-    - docker tag austinpray/python-node austinpray/python-node:3-8.12.0
+    - docker tag austinpray/python-node austinpray/python-node:3-8.14
+    - docker tag austinpray/python-node austinpray/python-node:3-8.14.0
     - docker tag austinpray/python-node austinpray/python-node:3.7-8
-    - docker tag austinpray/python-node austinpray/python-node:3.7-8.12
-    - docker tag austinpray/python-node austinpray/python-node:3.7-8.12.0
-    - docker tag austinpray/python-node austinpray/python-node:3.7.0-8
-    - docker tag austinpray/python-node austinpray/python-node:3.7.0-8.12
-    - docker tag austinpray/python-node austinpray/python-node:3.7.0-8.12.0
+    - docker tag austinpray/python-node austinpray/python-node:3.7-8.14
+    - docker tag austinpray/python-node austinpray/python-node:3.7-8.14.0
+    - docker tag austinpray/python-node austinpray/python-node:3.7.1-8
+    - docker tag austinpray/python-node austinpray/python-node:3.7.1-8.14
+    - docker tag austinpray/python-node austinpray/python-node:3.7.1-8.14.0
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3-8'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3-8.12'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3-8.12.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3-8.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3-8.14.0'
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7-8'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7-8.12'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7-8.12.0'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.0-8'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.0-8.12'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.0-8.12.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7-8.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7-8.14.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.1-8'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.1-8.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.1-8.14.0'
     stage: Image Builds
   - if: type NOT IN (cron)
-    name: 3-6, 3-6.14, 3-6.14.4, 3.7-6, 3.7-6.14, 3.7-6.14.4, 3.7.0-6, 3.7.0-6.14,
-      3.7.0-6.14.4
+    name: 3-6, 3-6.15, 3-6.15.1, 3.7-6, 3.7-6.15, 3.7-6.15.1, 3.7.1-6, 3.7.1-6.15,
+      3.7.1-6.15.1
     script:
     - set -e
     - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
     - '# run tests'
     - travis_retry docker build -t austinpray/python-node dockerfiles/3.7-6
     - docker tag austinpray/python-node austinpray/python-node:3-6
-    - docker tag austinpray/python-node austinpray/python-node:3-6.14
-    - docker tag austinpray/python-node austinpray/python-node:3-6.14.4
+    - docker tag austinpray/python-node austinpray/python-node:3-6.15
+    - docker tag austinpray/python-node austinpray/python-node:3-6.15.1
     - docker tag austinpray/python-node austinpray/python-node:3.7-6
-    - docker tag austinpray/python-node austinpray/python-node:3.7-6.14
-    - docker tag austinpray/python-node austinpray/python-node:3.7-6.14.4
-    - docker tag austinpray/python-node austinpray/python-node:3.7.0-6
-    - docker tag austinpray/python-node austinpray/python-node:3.7.0-6.14
-    - docker tag austinpray/python-node austinpray/python-node:3.7.0-6.14.4
+    - docker tag austinpray/python-node austinpray/python-node:3.7-6.15
+    - docker tag austinpray/python-node austinpray/python-node:3.7-6.15.1
+    - docker tag austinpray/python-node austinpray/python-node:3.7.1-6
+    - docker tag austinpray/python-node austinpray/python-node:3.7.1-6.15
+    - docker tag austinpray/python-node austinpray/python-node:3.7.1-6.15.1
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3-6'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3-6.14'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3-6.14.4'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3-6.15'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3-6.15.1'
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7-6'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7-6.14'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7-6.14.4'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.0-6'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.0-6.14'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.0-6.14.4'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7-6.15'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7-6.15.1'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.1-6'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.1-6.15'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.7.1-6.15.1'
     stage: Image Builds
   - if: type NOT IN (cron)
-    name: 2-10, 2-10.10, 2-10.10.0, 2.7-10, 2.7-10.10, 2.7-10.10.0, 2.7.15-10, 2.7.15-10.10,
-      2.7.15-10.10.0
+    name: 2-11, 2-11.3, 2-11.3.0, 2.7-11, 2.7-11.3, 2.7-11.3.0, 2.7.15-11, 2.7.15-11.3,
+      2.7.15-11.3.0
+    script:
+    - set -e
+    - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+    - '# run tests'
+    - travis_retry docker build -t austinpray/python-node dockerfiles/2.7-11
+    - docker tag austinpray/python-node austinpray/python-node:2-11
+    - docker tag austinpray/python-node austinpray/python-node:2-11.3
+    - docker tag austinpray/python-node austinpray/python-node:2-11.3.0
+    - docker tag austinpray/python-node austinpray/python-node:2.7-11
+    - docker tag austinpray/python-node austinpray/python-node:2.7-11.3
+    - docker tag austinpray/python-node austinpray/python-node:2.7-11.3.0
+    - docker tag austinpray/python-node austinpray/python-node:2.7.15-11
+    - docker tag austinpray/python-node austinpray/python-node:2.7.15-11.3
+    - docker tag austinpray/python-node austinpray/python-node:2.7.15-11.3.0
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2-11'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2-11.3'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2-11.3.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7-11'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7-11.3'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7-11.3.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7.15-11'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7.15-11.3'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7.15-11.3.0'
+    stage: Image Builds
+  - if: type NOT IN (cron)
+    name: 2-10, 2-10.14, 2-10.14.1, 2.7-10, 2.7-10.14, 2.7-10.14.1, 2.7.15-10, 2.7.15-10.14,
+      2.7.15-10.14.1
     script:
     - set -e
     - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
     - '# run tests'
     - travis_retry docker build -t austinpray/python-node dockerfiles/2.7-10
     - docker tag austinpray/python-node austinpray/python-node:2-10
-    - docker tag austinpray/python-node austinpray/python-node:2-10.10
-    - docker tag austinpray/python-node austinpray/python-node:2-10.10.0
+    - docker tag austinpray/python-node austinpray/python-node:2-10.14
+    - docker tag austinpray/python-node austinpray/python-node:2-10.14.1
     - docker tag austinpray/python-node austinpray/python-node:2.7-10
-    - docker tag austinpray/python-node austinpray/python-node:2.7-10.10
-    - docker tag austinpray/python-node austinpray/python-node:2.7-10.10.0
+    - docker tag austinpray/python-node austinpray/python-node:2.7-10.14
+    - docker tag austinpray/python-node austinpray/python-node:2.7-10.14.1
     - docker tag austinpray/python-node austinpray/python-node:2.7.15-10
-    - docker tag austinpray/python-node austinpray/python-node:2.7.15-10.10
-    - docker tag austinpray/python-node austinpray/python-node:2.7.15-10.10.0
+    - docker tag austinpray/python-node austinpray/python-node:2.7.15-10.14
+    - docker tag austinpray/python-node austinpray/python-node:2.7.15-10.14.1
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2-10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2-10.10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2-10.10.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2-10.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2-10.14.1'
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7-10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7-10.10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7-10.10.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7-10.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7-10.14.1'
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7.15-10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7.15-10.10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7.15-10.10.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7.15-10.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7.15-10.14.1'
     stage: Image Builds
   - if: type NOT IN (cron)
-    name: 2-8, 2-8.12, 2-8.12.0, 2.7-8, 2.7-8.12, 2.7-8.12.0, 2.7.15-8, 2.7.15-8.12,
-      2.7.15-8.12.0
+    name: 2-8, 2-8.14, 2-8.14.0, 2.7-8, 2.7-8.14, 2.7-8.14.0, 2.7.15-8, 2.7.15-8.14,
+      2.7.15-8.14.0
     script:
     - set -e
     - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
     - '# run tests'
     - travis_retry docker build -t austinpray/python-node dockerfiles/2.7-8
     - docker tag austinpray/python-node austinpray/python-node:2-8
-    - docker tag austinpray/python-node austinpray/python-node:2-8.12
-    - docker tag austinpray/python-node austinpray/python-node:2-8.12.0
+    - docker tag austinpray/python-node austinpray/python-node:2-8.14
+    - docker tag austinpray/python-node austinpray/python-node:2-8.14.0
     - docker tag austinpray/python-node austinpray/python-node:2.7-8
-    - docker tag austinpray/python-node austinpray/python-node:2.7-8.12
-    - docker tag austinpray/python-node austinpray/python-node:2.7-8.12.0
+    - docker tag austinpray/python-node austinpray/python-node:2.7-8.14
+    - docker tag austinpray/python-node austinpray/python-node:2.7-8.14.0
     - docker tag austinpray/python-node austinpray/python-node:2.7.15-8
-    - docker tag austinpray/python-node austinpray/python-node:2.7.15-8.12
-    - docker tag austinpray/python-node austinpray/python-node:2.7.15-8.12.0
+    - docker tag austinpray/python-node austinpray/python-node:2.7.15-8.14
+    - docker tag austinpray/python-node austinpray/python-node:2.7.15-8.14.0
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2-8'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2-8.12'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2-8.12.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2-8.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2-8.14.0'
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7-8'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7-8.12'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7-8.12.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7-8.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7-8.14.0'
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7.15-8'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7.15-8.12'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7.15-8.12.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7.15-8.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7.15-8.14.0'
     stage: Image Builds
   - if: type NOT IN (cron)
-    name: 2-6, 2-6.14, 2-6.14.4, 2.7-6, 2.7-6.14, 2.7-6.14.4, 2.7.15-6, 2.7.15-6.14,
-      2.7.15-6.14.4
+    name: 2-6, 2-6.15, 2-6.15.1, 2.7-6, 2.7-6.15, 2.7-6.15.1, 2.7.15-6, 2.7.15-6.15,
+      2.7.15-6.15.1
     script:
     - set -e
     - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
     - '# run tests'
     - travis_retry docker build -t austinpray/python-node dockerfiles/2.7-6
     - docker tag austinpray/python-node austinpray/python-node:2-6
-    - docker tag austinpray/python-node austinpray/python-node:2-6.14
-    - docker tag austinpray/python-node austinpray/python-node:2-6.14.4
+    - docker tag austinpray/python-node austinpray/python-node:2-6.15
+    - docker tag austinpray/python-node austinpray/python-node:2-6.15.1
     - docker tag austinpray/python-node austinpray/python-node:2.7-6
-    - docker tag austinpray/python-node austinpray/python-node:2.7-6.14
-    - docker tag austinpray/python-node austinpray/python-node:2.7-6.14.4
+    - docker tag austinpray/python-node austinpray/python-node:2.7-6.15
+    - docker tag austinpray/python-node austinpray/python-node:2.7-6.15.1
     - docker tag austinpray/python-node austinpray/python-node:2.7.15-6
-    - docker tag austinpray/python-node austinpray/python-node:2.7.15-6.14
-    - docker tag austinpray/python-node austinpray/python-node:2.7.15-6.14.4
+    - docker tag austinpray/python-node austinpray/python-node:2.7.15-6.15
+    - docker tag austinpray/python-node austinpray/python-node:2.7.15-6.15.1
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2-6'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2-6.14'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2-6.14.4'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2-6.15'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2-6.15.1'
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7-6'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7-6.14'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7-6.14.4'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7-6.15'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7-6.15.1'
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7.15-6'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7.15-6.14'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7.15-6.14.4'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7.15-6.15'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:2.7.15-6.15.1'
     stage: Image Builds
   - if: type NOT IN (cron)
-    name: 3.6-10, 3.6-10.10, 3.6-10.10.0, 3.6.6-10, 3.6.6-10.10, 3.6.6-10.10.0
+    name: 3.6-11, 3.6-11.3, 3.6-11.3.0, 3.6.7-11, 3.6.7-11.3, 3.6.7-11.3.0
+    script:
+    - set -e
+    - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+    - '# run tests'
+    - travis_retry docker build -t austinpray/python-node dockerfiles/3.6-11
+    - docker tag austinpray/python-node austinpray/python-node:3.6-11
+    - docker tag austinpray/python-node austinpray/python-node:3.6-11.3
+    - docker tag austinpray/python-node austinpray/python-node:3.6-11.3.0
+    - docker tag austinpray/python-node austinpray/python-node:3.6.7-11
+    - docker tag austinpray/python-node austinpray/python-node:3.6.7-11.3
+    - docker tag austinpray/python-node austinpray/python-node:3.6.7-11.3.0
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6-11'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6-11.3'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6-11.3.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.7-11'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.7-11.3'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.7-11.3.0'
+    stage: Image Builds
+  - if: type NOT IN (cron)
+    name: 3.6-10, 3.6-10.14, 3.6-10.14.1, 3.6.7-10, 3.6.7-10.14, 3.6.7-10.14.1
     script:
     - set -e
     - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
     - '# run tests'
     - travis_retry docker build -t austinpray/python-node dockerfiles/3.6-10
     - docker tag austinpray/python-node austinpray/python-node:3.6-10
-    - docker tag austinpray/python-node austinpray/python-node:3.6-10.10
-    - docker tag austinpray/python-node austinpray/python-node:3.6-10.10.0
-    - docker tag austinpray/python-node austinpray/python-node:3.6.6-10
-    - docker tag austinpray/python-node austinpray/python-node:3.6.6-10.10
-    - docker tag austinpray/python-node austinpray/python-node:3.6.6-10.10.0
+    - docker tag austinpray/python-node austinpray/python-node:3.6-10.14
+    - docker tag austinpray/python-node austinpray/python-node:3.6-10.14.1
+    - docker tag austinpray/python-node austinpray/python-node:3.6.7-10
+    - docker tag austinpray/python-node austinpray/python-node:3.6.7-10.14
+    - docker tag austinpray/python-node austinpray/python-node:3.6.7-10.14.1
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6-10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6-10.10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6-10.10.0'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.6-10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.6-10.10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.6-10.10.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6-10.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6-10.14.1'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.7-10'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.7-10.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.7-10.14.1'
     stage: Image Builds
   - if: type NOT IN (cron)
-    name: 3.6-8, 3.6-8.12, 3.6-8.12.0, 3.6.6-8, 3.6.6-8.12, 3.6.6-8.12.0
+    name: 3.6-8, 3.6-8.14, 3.6-8.14.0, 3.6.7-8, 3.6.7-8.14, 3.6.7-8.14.0
     script:
     - set -e
     - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
     - '# run tests'
     - travis_retry docker build -t austinpray/python-node dockerfiles/3.6-8
     - docker tag austinpray/python-node austinpray/python-node:3.6-8
-    - docker tag austinpray/python-node austinpray/python-node:3.6-8.12
-    - docker tag austinpray/python-node austinpray/python-node:3.6-8.12.0
-    - docker tag austinpray/python-node austinpray/python-node:3.6.6-8
-    - docker tag austinpray/python-node austinpray/python-node:3.6.6-8.12
-    - docker tag austinpray/python-node austinpray/python-node:3.6.6-8.12.0
+    - docker tag austinpray/python-node austinpray/python-node:3.6-8.14
+    - docker tag austinpray/python-node austinpray/python-node:3.6-8.14.0
+    - docker tag austinpray/python-node austinpray/python-node:3.6.7-8
+    - docker tag austinpray/python-node austinpray/python-node:3.6.7-8.14
+    - docker tag austinpray/python-node austinpray/python-node:3.6.7-8.14.0
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6-8'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6-8.12'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6-8.12.0'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.6-8'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.6-8.12'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.6-8.12.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6-8.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6-8.14.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.7-8'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.7-8.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.7-8.14.0'
     stage: Image Builds
   - if: type NOT IN (cron)
-    name: 3.6-6, 3.6-6.14, 3.6-6.14.4, 3.6.6-6, 3.6.6-6.14, 3.6.6-6.14.4
+    name: 3.6-6, 3.6-6.15, 3.6-6.15.1, 3.6.7-6, 3.6.7-6.15, 3.6.7-6.15.1
     script:
     - set -e
     - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
     - '# run tests'
     - travis_retry docker build -t austinpray/python-node dockerfiles/3.6-6
     - docker tag austinpray/python-node austinpray/python-node:3.6-6
-    - docker tag austinpray/python-node austinpray/python-node:3.6-6.14
-    - docker tag austinpray/python-node austinpray/python-node:3.6-6.14.4
-    - docker tag austinpray/python-node austinpray/python-node:3.6.6-6
-    - docker tag austinpray/python-node austinpray/python-node:3.6.6-6.14
-    - docker tag austinpray/python-node austinpray/python-node:3.6.6-6.14.4
+    - docker tag austinpray/python-node austinpray/python-node:3.6-6.15
+    - docker tag austinpray/python-node austinpray/python-node:3.6-6.15.1
+    - docker tag austinpray/python-node austinpray/python-node:3.6.7-6
+    - docker tag austinpray/python-node austinpray/python-node:3.6.7-6.15
+    - docker tag austinpray/python-node austinpray/python-node:3.6.7-6.15.1
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6-6'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6-6.14'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6-6.14.4'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.6-6'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.6-6.14'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.6-6.14.4'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6-6.15'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6-6.15.1'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.7-6'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.7-6.15'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.6.7-6.15.1'
     stage: Image Builds
   - if: type NOT IN (cron)
-    name: 3.5-10, 3.5-10.10, 3.5-10.10.0, 3.5.6-10, 3.5.6-10.10, 3.5.6-10.10.0
+    name: 3.5-11, 3.5-11.3, 3.5-11.3.0, 3.5.6-11, 3.5.6-11.3, 3.5.6-11.3.0
+    script:
+    - set -e
+    - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+    - '# run tests'
+    - travis_retry docker build -t austinpray/python-node dockerfiles/3.5-11
+    - docker tag austinpray/python-node austinpray/python-node:3.5-11
+    - docker tag austinpray/python-node austinpray/python-node:3.5-11.3
+    - docker tag austinpray/python-node austinpray/python-node:3.5-11.3.0
+    - docker tag austinpray/python-node austinpray/python-node:3.5.6-11
+    - docker tag austinpray/python-node austinpray/python-node:3.5.6-11.3
+    - docker tag austinpray/python-node austinpray/python-node:3.5.6-11.3.0
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5-11'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5-11.3'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5-11.3.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5.6-11'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5.6-11.3'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5.6-11.3.0'
+    stage: Image Builds
+  - if: type NOT IN (cron)
+    name: 3.5-10, 3.5-10.14, 3.5-10.14.1, 3.5.6-10, 3.5.6-10.14, 3.5.6-10.14.1
     script:
     - set -e
     - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
     - '# run tests'
     - travis_retry docker build -t austinpray/python-node dockerfiles/3.5-10
     - docker tag austinpray/python-node austinpray/python-node:3.5-10
-    - docker tag austinpray/python-node austinpray/python-node:3.5-10.10
-    - docker tag austinpray/python-node austinpray/python-node:3.5-10.10.0
+    - docker tag austinpray/python-node austinpray/python-node:3.5-10.14
+    - docker tag austinpray/python-node austinpray/python-node:3.5-10.14.1
     - docker tag austinpray/python-node austinpray/python-node:3.5.6-10
-    - docker tag austinpray/python-node austinpray/python-node:3.5.6-10.10
-    - docker tag austinpray/python-node austinpray/python-node:3.5.6-10.10.0
+    - docker tag austinpray/python-node austinpray/python-node:3.5.6-10.14
+    - docker tag austinpray/python-node austinpray/python-node:3.5.6-10.14.1
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5-10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5-10.10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5-10.10.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5-10.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5-10.14.1'
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5.6-10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5.6-10.10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5.6-10.10.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5.6-10.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5.6-10.14.1'
     stage: Image Builds
   - if: type NOT IN (cron)
-    name: 3.5-8, 3.5-8.12, 3.5-8.12.0, 3.5.6-8, 3.5.6-8.12, 3.5.6-8.12.0
+    name: 3.5-8, 3.5-8.14, 3.5-8.14.0, 3.5.6-8, 3.5.6-8.14, 3.5.6-8.14.0
     script:
     - set -e
     - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
     - '# run tests'
     - travis_retry docker build -t austinpray/python-node dockerfiles/3.5-8
     - docker tag austinpray/python-node austinpray/python-node:3.5-8
-    - docker tag austinpray/python-node austinpray/python-node:3.5-8.12
-    - docker tag austinpray/python-node austinpray/python-node:3.5-8.12.0
+    - docker tag austinpray/python-node austinpray/python-node:3.5-8.14
+    - docker tag austinpray/python-node austinpray/python-node:3.5-8.14.0
     - docker tag austinpray/python-node austinpray/python-node:3.5.6-8
-    - docker tag austinpray/python-node austinpray/python-node:3.5.6-8.12
-    - docker tag austinpray/python-node austinpray/python-node:3.5.6-8.12.0
+    - docker tag austinpray/python-node austinpray/python-node:3.5.6-8.14
+    - docker tag austinpray/python-node austinpray/python-node:3.5.6-8.14.0
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5-8'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5-8.12'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5-8.12.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5-8.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5-8.14.0'
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5.6-8'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5.6-8.12'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5.6-8.12.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5.6-8.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5.6-8.14.0'
     stage: Image Builds
   - if: type NOT IN (cron)
-    name: 3.5-6, 3.5-6.14, 3.5-6.14.4, 3.5.6-6, 3.5.6-6.14, 3.5.6-6.14.4
+    name: 3.5-6, 3.5-6.15, 3.5-6.15.1, 3.5.6-6, 3.5.6-6.15, 3.5.6-6.15.1
     script:
     - set -e
     - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
     - '# run tests'
     - travis_retry docker build -t austinpray/python-node dockerfiles/3.5-6
     - docker tag austinpray/python-node austinpray/python-node:3.5-6
-    - docker tag austinpray/python-node austinpray/python-node:3.5-6.14
-    - docker tag austinpray/python-node austinpray/python-node:3.5-6.14.4
+    - docker tag austinpray/python-node austinpray/python-node:3.5-6.15
+    - docker tag austinpray/python-node austinpray/python-node:3.5-6.15.1
     - docker tag austinpray/python-node austinpray/python-node:3.5.6-6
-    - docker tag austinpray/python-node austinpray/python-node:3.5.6-6.14
-    - docker tag austinpray/python-node austinpray/python-node:3.5.6-6.14.4
+    - docker tag austinpray/python-node austinpray/python-node:3.5.6-6.15
+    - docker tag austinpray/python-node austinpray/python-node:3.5.6-6.15.1
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5-6'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5-6.14'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5-6.14.4'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5-6.15'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5-6.15.1'
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5.6-6'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5.6-6.14'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5.6-6.14.4'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5.6-6.15'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.5.6-6.15.1'
     stage: Image Builds
   - if: type NOT IN (cron)
-    name: 3.4-10, 3.4-10.10, 3.4-10.10.0, 3.4.9-10, 3.4.9-10.10, 3.4.9-10.10.0
+    name: 3.4-11, 3.4-11.3, 3.4-11.3.0, 3.4.9-11, 3.4.9-11.3, 3.4.9-11.3.0
+    script:
+    - set -e
+    - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+    - '# run tests'
+    - travis_retry docker build -t austinpray/python-node dockerfiles/3.4-11
+    - docker tag austinpray/python-node austinpray/python-node:3.4-11
+    - docker tag austinpray/python-node austinpray/python-node:3.4-11.3
+    - docker tag austinpray/python-node austinpray/python-node:3.4-11.3.0
+    - docker tag austinpray/python-node austinpray/python-node:3.4.9-11
+    - docker tag austinpray/python-node austinpray/python-node:3.4.9-11.3
+    - docker tag austinpray/python-node austinpray/python-node:3.4.9-11.3.0
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4-11'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4-11.3'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4-11.3.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4.9-11'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4.9-11.3'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4.9-11.3.0'
+    stage: Image Builds
+  - if: type NOT IN (cron)
+    name: 3.4-10, 3.4-10.14, 3.4-10.14.1, 3.4.9-10, 3.4.9-10.14, 3.4.9-10.14.1
     script:
     - set -e
     - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
     - '# run tests'
     - travis_retry docker build -t austinpray/python-node dockerfiles/3.4-10
     - docker tag austinpray/python-node austinpray/python-node:3.4-10
-    - docker tag austinpray/python-node austinpray/python-node:3.4-10.10
-    - docker tag austinpray/python-node austinpray/python-node:3.4-10.10.0
+    - docker tag austinpray/python-node austinpray/python-node:3.4-10.14
+    - docker tag austinpray/python-node austinpray/python-node:3.4-10.14.1
     - docker tag austinpray/python-node austinpray/python-node:3.4.9-10
-    - docker tag austinpray/python-node austinpray/python-node:3.4.9-10.10
-    - docker tag austinpray/python-node austinpray/python-node:3.4.9-10.10.0
+    - docker tag austinpray/python-node austinpray/python-node:3.4.9-10.14
+    - docker tag austinpray/python-node austinpray/python-node:3.4.9-10.14.1
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4-10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4-10.10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4-10.10.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4-10.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4-10.14.1'
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4.9-10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4.9-10.10'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4.9-10.10.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4.9-10.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4.9-10.14.1'
     stage: Image Builds
   - if: type NOT IN (cron)
-    name: 3.4-8, 3.4-8.12, 3.4-8.12.0, 3.4.9-8, 3.4.9-8.12, 3.4.9-8.12.0
+    name: 3.4-8, 3.4-8.14, 3.4-8.14.0, 3.4.9-8, 3.4.9-8.14, 3.4.9-8.14.0
     script:
     - set -e
     - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
     - '# run tests'
     - travis_retry docker build -t austinpray/python-node dockerfiles/3.4-8
     - docker tag austinpray/python-node austinpray/python-node:3.4-8
-    - docker tag austinpray/python-node austinpray/python-node:3.4-8.12
-    - docker tag austinpray/python-node austinpray/python-node:3.4-8.12.0
+    - docker tag austinpray/python-node austinpray/python-node:3.4-8.14
+    - docker tag austinpray/python-node austinpray/python-node:3.4-8.14.0
     - docker tag austinpray/python-node austinpray/python-node:3.4.9-8
-    - docker tag austinpray/python-node austinpray/python-node:3.4.9-8.12
-    - docker tag austinpray/python-node austinpray/python-node:3.4.9-8.12.0
+    - docker tag austinpray/python-node austinpray/python-node:3.4.9-8.14
+    - docker tag austinpray/python-node austinpray/python-node:3.4.9-8.14.0
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4-8'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4-8.12'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4-8.12.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4-8.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4-8.14.0'
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4.9-8'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4.9-8.12'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4.9-8.12.0'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4.9-8.14'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4.9-8.14.0'
     stage: Image Builds
   - if: type NOT IN (cron)
-    name: 3.4-6, 3.4-6.14, 3.4-6.14.4, 3.4.9-6, 3.4.9-6.14, 3.4.9-6.14.4
+    name: 3.4-6, 3.4-6.15, 3.4-6.15.1, 3.4.9-6, 3.4.9-6.15, 3.4.9-6.15.1
     script:
     - set -e
     - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
     - '# run tests'
     - travis_retry docker build -t austinpray/python-node dockerfiles/3.4-6
     - docker tag austinpray/python-node austinpray/python-node:3.4-6
-    - docker tag austinpray/python-node austinpray/python-node:3.4-6.14
-    - docker tag austinpray/python-node austinpray/python-node:3.4-6.14.4
+    - docker tag austinpray/python-node austinpray/python-node:3.4-6.15
+    - docker tag austinpray/python-node austinpray/python-node:3.4-6.15.1
     - docker tag austinpray/python-node austinpray/python-node:3.4.9-6
-    - docker tag austinpray/python-node austinpray/python-node:3.4.9-6.14
-    - docker tag austinpray/python-node austinpray/python-node:3.4.9-6.14.4
+    - docker tag austinpray/python-node austinpray/python-node:3.4.9-6.15
+    - docker tag austinpray/python-node austinpray/python-node:3.4.9-6.15.1
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4-6'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4-6.14'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4-6.14.4'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4-6.15'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4-6.15.1'
     - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4.9-6'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4.9-6.14'
-    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4.9-6.14.4'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4.9-6.15'
+    - '[ "$TRAVIS_BRANCH" = "master" ] && docker push austinpray/python-node:3.4.9-6.15.1'
     stage: Image Builds
 language: python
 python: 3.6

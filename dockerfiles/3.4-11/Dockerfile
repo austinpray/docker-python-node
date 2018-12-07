@@ -6,11 +6,12 @@ ENV PATH /usr/local/bin:$PATH
 ENV LANG C.UTF-8
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
+		libssl1.0-dev \
 		tk-dev \
 	&& rm -rf /var/lib/apt/lists/*
 
-ENV GPG_KEY 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
-ENV PYTHON_VERSION 3.6.7
+ENV GPG_KEY 97FC712E4C024BBEA48A61ED3A5CA953F73C700D
+ENV PYTHON_VERSION 3.4.9
 
 RUN set -ex \
 	\
@@ -78,7 +79,7 @@ RUN set -ex; \
 RUN groupadd --gid 1000 node \
   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
 
-ENV NODE_VERSION 8.14.0
+ENV NODE_VERSION 11.3.0
 
 RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && case "${dpkgArch##*-}" in \
